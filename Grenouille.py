@@ -1,4 +1,5 @@
 import jsonpickle
+from playsound3 import playsound
 from Mouche import Mouche
 
 class Grenouille:
@@ -77,6 +78,7 @@ class Grenouille:
 
     def parler(self) -> None:
         print("Ribbit !")
+        playsound("parler.mp3")
 
     def __str__(self):
         return f"Une grenouille de {self.poids} grammes et {self._taille} cm."
@@ -86,6 +88,8 @@ class Grenouille:
 
 gren = Grenouille(3, 5, 4, 1)
 assert gren.get_poids() == 4
+
+gren.parler()
 
 gren.manger(Mouche(5))
 assert gren.get_poids() == 9
