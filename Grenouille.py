@@ -1,3 +1,4 @@
+import jsonpickle
 from Mouche import Mouche
 
 class Grenouille:
@@ -79,3 +80,21 @@ class Grenouille:
 
     def __str__(self):
         return f"Une grenouille de {self.poids} grammes et {self._taille} cm."
+
+
+# read & write
+
+gren = Grenouille(3, 5, 4, 1)
+assert gren.get_poids() == 4
+
+gren.manger(Mouche(5))
+assert gren.get_poids() == 9
+
+# write
+with open("grenouille.json", "w", encoding="utf-8") as fichier_grenouille:
+    fichier_grenouille.write(jsonpickle.encode(gren, indent=4))
+
+# read
+with open("grenouille.json", "r", encoding="utf-8") as fichier_grenouille:
+    gren_bck = jsonpickle.decode(fichier_grenouille.read())
+    assert gren_bck.get_poids() == 9
